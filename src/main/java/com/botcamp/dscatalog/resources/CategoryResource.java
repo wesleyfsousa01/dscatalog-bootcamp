@@ -1,6 +1,8 @@
 package com.botcamp.dscatalog.resources;
 
 import com.botcamp.dscatalog.entities.Category;
+import com.botcamp.dscatalog.service.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,11 +15,12 @@ import java.util.List;
 @RequestMapping(value = "/categories")
 public class CategoryResource {
 
+    @Autowired
+    private CategoryService categoryService;
+
     @GetMapping
     public ResponseEntity<List<Category>> findAll(){
-        List<Category> listaDeCategorias = new ArrayList<>();
-        listaDeCategorias.add(new Category(1l, "Books"));
-        listaDeCategorias.add(new Category(1l, "Eletronics"));
+        List<Category> listaDeCategorias = categoryService.findAll();
         return ResponseEntity.ok().body(listaDeCategorias);
     }
 }
