@@ -1,6 +1,6 @@
 package com.botcamp.dscatalog.resources;
 
-import com.botcamp.dscatalog.entities.Category;
+import com.botcamp.dscatalog.dto.CategoryDTO;
 import com.botcamp.dscatalog.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,8 +18,8 @@ public class CategoryResource {
     private CategoryService categoryService;
 
     @GetMapping
-    public ResponseEntity<List<Category>> findAll(){
-        List<Category> listaDeCategorias = categoryService.findAll();
+    public ResponseEntity<List<CategoryDTO>> findAll(){
+        List<CategoryDTO> listaDeCategorias = categoryService.findAll();
         return ResponseEntity.ok().body(listaDeCategorias);
     }
 }

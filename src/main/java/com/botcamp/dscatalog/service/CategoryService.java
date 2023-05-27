@@ -1,5 +1,6 @@
 package com.botcamp.dscatalog.service;
 
+import com.botcamp.dscatalog.dto.CategoryDTO;
 import com.botcamp.dscatalog.entities.Category;
 import com.botcamp.dscatalog.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,8 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
 
     @Transactional(readOnly = true)
-    public List<Category> findAll(){
-        return categoryRepository.findAll();
+    public List<CategoryDTO> findAll(){
+        List<Category> lista = categoryRepository.findAll();
+        return  lista.stream().map(x -> new CategoryDTO(x)).toList();
     }
 }
