@@ -20,6 +20,7 @@ public class ResourceExceptionHandler {
         error.setError("Resource not found");
         error.setMessage(e.getMessage());
         error.setPath(request.getRequestURI());
+
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 }

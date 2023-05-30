@@ -27,4 +27,11 @@ public class CategoryService {
         List<Category> lista = categoryRepository.findAll();
         return  lista.stream().map(x -> new CategoryDTO(x)).toList();
     }
+
+    @Transactional(readOnly = true)
+    public CategoryDTO save(CategoryDTO dto){
+        Category obj = new Category();
+        obj.setName(dto.getName());
+       return new CategoryDTO(categoryRepository.save(obj));
+    }
 }
