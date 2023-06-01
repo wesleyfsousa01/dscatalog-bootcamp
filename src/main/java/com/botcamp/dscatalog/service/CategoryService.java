@@ -8,11 +8,10 @@ import com.botcamp.dscatalog.service.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 public class CategoryService {
@@ -30,9 +29,9 @@ public class CategoryService {
          return category;
     }
     @Transactional(readOnly = true)
-    public List<CategoryDTO> findAll() {
-        List<Category> lista = categoryRepository.findAll();
-        return lista.stream().map(x -> new CategoryDTO(x)).toList();
+    public Page<CategoryDTO> findAllPaged(PageRequest pageRequest) {
+        Page<Category> lista = categoryRepository.findAll(pageRequest);
+        return lista.map(x -> new CategoryDTO(x));
     }
 
     @Transactional(readOnly = true)
